@@ -1,6 +1,9 @@
 import React from 'react';
-import '../scss/index.css'
-export default function LayoutAdmin(){
+import './layoutAdmin.scss';
+import { Route} from 'react-router-dom';
+
+export default function LayoutAdmin(props){
+    const {routes} = props;
     return(
         <div>
             <header>
@@ -17,9 +20,7 @@ export default function LayoutAdmin(){
                 </nav>
                 
                 <article>
-                    <h1>London</h1>
-                    <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
-                    <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+                    <LoadRouters routes={routes}></LoadRouters>
                 </article>
                 </section>
 
@@ -29,4 +30,17 @@ export default function LayoutAdmin(){
 
         </div>
     )
+}
+
+function LoadRouters({routes}){
+    console.log(routes)
+    // const routes = props;
+    return routes.map((route, index) =>(
+        <Route 
+            key={index}
+            path={route.path}
+            exact={route.exact}
+            component={route.component}
+        />
+    ));
 }
